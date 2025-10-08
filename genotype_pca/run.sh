@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-vcf="$1"
+vcf=inputs/ALL.correctRefAlt.norm.vcf.gz
+vcf_file=$(basename $vcf)
+genotype_pc=results/${vcf_file%.vcf.gz}.maf05_geno01.pruned.pca.evec
+genotype_pc_tr=${genotype_pc}.tr
 
 
 # 設定
@@ -21,13 +24,14 @@ source <(curl -fsSL https://raw.githubusercontent.com/hamanakakohei/misc/refs/he
 # gtex-piplineのスクリプトを使ってeigensoftを動かす
 # ただ、smartpca.perl内のploteig以降でエラーが出たまま
 scripts/01_compute_genotype_pcs.edit.py \
-  inputs/${vcf} \
-  results/genotype_pcs.txt
+  ${vcf} \
+  -o results \
+  > logs/01.txt 2>&1
 
 
 # 必須でないが、転置した結果も出力する
-tail -n+2 results/genotype_pcs.txt \
+tail -n+2 $genotype_pc \
   | cut -d":" -f2- \
   | transpose \
   | awk 'NR==1{print "ID\t"$0} NR>1{print "PC"NR-1"\t"$0}' \
-  > results/genotype_pcs.transposed.txt
+  > $genotype_pc_tr
