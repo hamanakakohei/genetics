@@ -1,0 +1,1 @@
+../gtex-pipeline/genotype/compute_genotype_pcs.edit.py

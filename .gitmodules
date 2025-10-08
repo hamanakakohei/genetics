@@ -1,0 +1,4 @@
+[submodule "genotype_pca/gtex-pipeline"]
+	path = genotype_pca/gtex-pipeline
+	url = https://github.com/hamanakakohei/gtex-pipeline.git
+	branch = gtex_v10_gm
