@@ -4,4 +4,17 @@
 - smartpca.perlのploteig以降が動かないので、対応する中間ファイル削除をコメントアウト
 
 eigensoftは、からダウンロードして、smartpcaを自分でコンパイル
-plink2は、
+plink2は、NIG環境であれば、以下のようなラッパーを作ってパスへ入れておく
+```
+#!/bin/bash
+THREADS=${PLINK_THREADS:-4}
+MEMORY=${PLINK_MEMORY:-16000}
+
+IMG="/usr/local/biotools/p/plink2xxxxx"
+
+singularity exec $IMG \
+  plink2 \
+  --threads "$THREADS" \
+  --memory "$MEMORY" \
+  "$@"
+```
