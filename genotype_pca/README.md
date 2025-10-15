@@ -7,7 +7,7 @@
 
 
 EIGENSOFT は https://github.com/argriffing/eigensoft/tree/master からダウンロードし、`smartpca` を自分でコンパイルする。  
-
+NIG環境ではコンパイル時にエラーが出て、「-lm」の位置を変えた。
 
 PLINK2は、NIG 環境であれば、以下のようなラッパーを作ってパスへ入れておく：  
 
@@ -23,3 +23,6 @@ singularity exec "$IMG" \
   --threads "$THREADS" \
   --memory "$MEMORY" \
   "$@"
+```
+To do：
+gtexスクリプトを使うためにわざわざサブモジュール化したが、run_pipeline.sh内でwgetして使うようにした方がシンプル。
