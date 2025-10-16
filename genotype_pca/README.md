@@ -6,7 +6,7 @@ gtex-pipelineの `compute_genotype_pcs.py` でPCAする。
 修正点は以下の通り：
 
 - `.bim` ファイルの染色体番号から `chr` を除く  
-- `.fam` ファイルの phenotype 列を `1` にして missing 扱いしない  
+- `.fam` ファイルの phenotype 列を ランダムに`1` or '2'（case/control）にして missing 扱いしない  
 - `smartpca.perl` の `ploteig` 以降が動かないので、対応する中間ファイル削除をコメントアウト  
 
 ### 準備
